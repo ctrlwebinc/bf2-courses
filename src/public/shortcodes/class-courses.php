@@ -61,6 +61,8 @@ class Courses {
 	 */
 	public function list( $atts = array(), $content = null, string $tag ) {
 
+		$plugin_data = get_plugin_data( __FILE__ );
+
 		$atts = array_change_key_case( (array) $atts, CASE_LOWER );
 
 		// Override default attributes with user attributes.
@@ -106,7 +108,7 @@ class Courses {
 			// Filter.
 			$o .= '<form action="" method="get">';
 			$o .= '<select name="course-cat" class="course-filter-select" onchange="this.form.submit()">';
-			$o .= sprintf( '<option class="course-category-filter-option" value="">%s</option>', __( 'All', 'badgefactor2' ) );
+			$o .= sprintf( '<option class="course-category-filter-option" value="">%s</option>', __( 'All', $plugin_data['TextDomain'] ) );
 			foreach ( $course_categories as $course_category ) {
 				$selected = isset( $_GET['course-cat'] ) && intval( $_GET['course-cat'] ) === intval( $course_category->term_id ) ? ' selected' : '';
 				$o       .= sprintf( '<option class="course-category-filter-option" value="%s"%s>%s</option>', $course_category->term_id, $selected, $course_category->name );
@@ -120,7 +122,7 @@ class Courses {
 
 		if ( ! $courses ) {
 
-			$msg = isset( $_GET['course-cat'] ) ? __( 'There are no courses currently available in this category.', 'badgefactor2' ) : __( 'There are no courses currently available.', 'badgefactor2' );
+			$msg = isset( $_GET['course-cat'] ) ? __( 'There are no courses currently available in this category.', $plugin_data['TextDomain'] ) : __( 'There are no courses currently available.', $plugin_data['TextDomain'] );
 			$o  .= sprintf( '<p>%s</p>', $msg );
 
 		} else {
@@ -154,9 +156,8 @@ class Courses {
 							$badge_image = wp_get_attachment_image_src( get_post_thumbnail_id( $badge_id ), $list_atts['badge-image-size'] );
 						} else {
 							$badge             = new stdClass();
-							$badge->post_title = 'No badge granted for this course';
-							$badge_image       = BF2_BASEURL . '/assets/images/no-badge.svg'; // TODO Add no badge image.
-
+							$badge->post_title = __( 'No badge issued for this course', $plugin_data['TextDomain'] );
+							$badge_image       = BF2_BASEURL . '/assets/images/no-badge.svg';
 						}
 
 						$o .= '<figure>';
