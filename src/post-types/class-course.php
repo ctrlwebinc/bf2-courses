@@ -30,6 +30,20 @@ namespace BadgeFactor2\Post_Types;
  */
 class Course {
 
+	/**
+	 * Custom post type's slug.
+	 *
+	 * @var string
+	 */
+	private static $slug = 'course';
+
+	/**
+	 * Custom post type's slug, pluralized.
+	 *
+	 * @var string
+	 */
+	private static $slug_plural = 'courses';
+
 
 	/**
 	 * Init hooks.
@@ -38,6 +52,8 @@ class Course {
 	 */
 	public static function init_hooks() {
 		add_action( 'init', array( Course::class, 'init' ), 99 );
+		add_action( 'admin_init', array( Course::class, 'add_capabilities' ), 10 );
+		add_action( 'init', array( Course::class, 'register_taxonomies' ), 10 );
 		add_filter( 'post_updated_messages', array( Course::class, 'updated_messages' ), 10 );
 		add_action( 'cmb2_admin_init', array( Course::class, 'register_settings_metaboxes' ), 10 );
 		add_action( 'cmb2_admin_init', array( Course::class, 'register_cpt_metaboxes' ), 10 );
@@ -53,7 +69,7 @@ class Course {
 		$badgefactor2_options = get_option( 'bf2_courses_settings' );
 
 		register_post_type(
-			'course',
+			self::$slug,
 			array(
 				'labels'            => array(
 					'name'                  => __( 'Courses', $plugin_data['TextDomain'] ),
@@ -63,10 +79,10 @@ class Course {
 					'attributes'            => __( 'Course Attributes', $plugin_data['TextDomain'] ),
 					'insert_into_item'      => __( 'Insert into Course', $plugin_data['TextDomain'] ),
 					'uploaded_to_this_item' => __( 'Uploaded to this Course', $plugin_data['TextDomain'] ),
-					'featured_image'        => _x( 'Featured Image', 'course', $plugin_data['TextDomain'] ),
-					'set_featured_image'    => _x( 'Set featured image', 'course', $plugin_data['TextDomain'] ),
-					'remove_featured_image' => _x( 'Remove featured image', 'course', $plugin_data['TextDomain'] ),
-					'use_featured_image'    => _x( 'Use as featured image', 'course', $plugin_data['TextDomain'] ),
+					'featured_image'        => _x( 'Featured Image', self::$slug, $plugin_data['TextDomain'] ),
+					'set_featured_image'    => _x( 'Set featured image', self::$slug, $plugin_data['TextDomain'] ),
+					'remove_featured_image' => _x( 'Remove featured image', self::$slug, $plugin_data['TextDomain'] ),
+					'use_featured_image'    => _x( 'Use as featured image', self::$slug, $plugin_data['TextDomain'] ),
 					'filter_items_list'     => __( 'Filter Courses list', $plugin_data['TextDomain'] ),
 					'items_list_navigation' => __( 'Courses list navigation', $plugin_data['TextDomain'] ),
 					'items_list'            => __( 'Courses list', $plugin_data['TextDomain'] ),
@@ -90,10 +106,12 @@ class Course {
 				'has_archive'       => ( isset( $badgefactor2_options['bf2_courses_use_archive'] ) && 'on' === $badgefactor2_options['bf2_courses_use_archive'] ),
 				'rewrite'           => true,
 				'query_var'         => true,
-				'menu_position'     => null,
+				'menu_position'     => 51,
 				'menu_icon'         => BF2_BASEURL . 'assets/images/course.svg',
 				'show_in_rest'      => false,
 				'taxonomies'        => array( 'course-category', 'course-level', 'course-title' ),
+				'capability_type'   => array( self::$slug, self::$slug_plural ),
+				'map_meta_cap'      => true,
 			)
 		);
 
@@ -111,7 +129,7 @@ class Course {
 
 		$permalink = get_permalink( $post );
 
-		$messages['course'] = array(
+		$messages[ self::$slug ] = array(
 			0  => '', // Unused. Messages start at index 1.
 			/* translators: %s: post permalink */
 			1  => sprintf( __( 'Course updated. <a target="_blank" href="%s">View Course</a>', 'badgefactor2' ), esc_url( $permalink ) ),
@@ -136,6 +154,58 @@ class Course {
 		);
 
 		return $messages;
+	}
+
+
+	/**
+	 * Add roles (capabilities) to custom post type.
+	 *
+	 * @return void
+	 */
+	public static function add_capabilities() {
+		$capabilities = array(
+			'edit_' . self::$slug_plural         => array(
+				'administrator',
+			),
+			'edit_other_' . self::$slug_plural   => array(
+				'administrator',
+			),
+			'edit_published_' . self::$slug_plural   => array(
+				'administrator',
+			),
+			'publish_' . self::$slug_plural      => array(
+				'administrator',
+			),
+			'delete_' . self::$slug              => array(
+				'administrator',
+			),
+			'delete_others_' . self::$slug              => array(
+				'administrator',
+			),
+			'delete_published_' . self::$slug              => array(
+				'administrator',
+			),
+			'delete_private_' . self::$slug              => array(
+				'administrator',
+			),
+			'edit_private_' . self::$slug              => array(
+				'administrator',
+			),
+			'read_private_' . self::$slug_plural => array(
+				'administrator',
+			),
+			'read_' . self::$slug                => array(
+				'administrator',
+			),
+		);
+
+		foreach ( $capabilities as $capability => $roles ) {
+			foreach ( $roles as $role ) {
+				$role = get_role( $role );
+				$role->add_cap( $capability );
+			}
+		}
+
 	}
 
 
@@ -178,12 +248,119 @@ class Course {
 	public static function register_cpt_metaboxes() {
 		$plugin_data = get_plugin_data( __FILE__ );
 
+		$cmb = new_cmb2_box(
+			array(
+				'id'           => 'course_links',
+				'title'        => __( 'Links', $plugin_data['TextDomain'] ),
+				'object_types' => array( self::$slug ),
+				'context'      => 'normal',
+				'priority'     => 'high',
+				'show_names'   => true,
+			)
+		);
+
+		$cmb->add_field(
+			array(
+				'id'      => 'course_badge_page',
+				'name'    => __( 'Badge Page', $plugin_data['TextDomain'] ),
+				'desc'    => __( 'Badge Page associated with this Course', $plugin_data['TextDomain'] ),
+				'type'    => 'pw_select',
+				'style'   => 'width: 200px',
+				'options' => BadgePage::select_options(),
+			)
+		);
+
+	}
+
+
+	/**
+	 * Register taxonomies.
+	 *
+	 * @return void
+	 */
+	public static function register_taxonomies() {
+		$plugin_data = get_plugin_data( __FILE__ );
+
+		register_taxonomy(
+			'course-category',
+			array( self::$slug ),
+			array(
+				'hierarchical'      => true,
+				'labels'            => array(
+					'name'              => __( 'Category', $plugin_data['TextDomain'] ),
+					'singular_name'     => __( 'Category', $plugin_data['TextDomain'] ),
+					'search_items'      => __( 'Search Categories', $plugin_data['TextDomain'] ),
+					'all_items'         => __( 'All Categories', $plugin_data['TextDomain'] ),
+					'parent_item'       => __( 'parent Category', $plugin_data['TextDomain'] ),
+					'parent_item_colon' => __( 'parent Category:', $plugin_data['TextDomain'] ),
+					'edit_item'         => __( 'Edit Category', $plugin_data['TextDomain'] ),
+					'update_item'       => __( 'Update Category', $plugin_data['TextDomain'] ),
+					'add_new_item'      => __( 'Add new Category', $plugin_data['TextDomain'] ),
+					'new_item_name'     => __( 'new Category Name', $plugin_data['TextDomain'] ),
+					'menu_name'         => __( 'Categories', $plugin_data['TextDomain'] ),
+				),
+				'show_ui'           => true,
+				'show_admin_column' => true,
+				'query_var'         => true,
+				'rewrite'           => array( 'slug' => 'course-category' ),
+			)
+		);
+
+		register_taxonomy(
+			'course-title',
+			array( self::$slug ),
+			array(
+				'hierarchical'      => true,
+				'labels'            => array(
+					'name'              => __( 'Title', $plugin_data['TextDomain'] ),
+					'singular_name'     => __( 'Title', $plugin_data['TextDomain'] ),
+					'search_items'      => __( 'Search Titles', $plugin_data['TextDomain'] ),
+					'all_items'         => __( 'All Titles', $plugin_data['TextDomain'] ),
+					'parent_item'       => __( 'parent Title', $plugin_data['TextDomain'] ),
+					'parent_item_colon' => __( 'parent Title:', $plugin_data['TextDomain'] ),
+					'edit_item'         => __( 'Edit Title', $plugin_data['TextDomain'] ),
+					'update_item'       => __( 'Update Title', $plugin_data['TextDomain'] ),
+					'add_new_item'      => __( 'Add new Title', $plugin_data['TextDomain'] ),
+					'new_item_name'     => __( 'new Title Name', $plugin_data['TextDomain'] ),
+					'menu_name'         => __( 'Titles', $plugin_data['TextDomain'] ),
+				),
+				'show_ui'           => true,
+				'show_admin_column' => true,
+				'query_var'         => true,
+				'rewrite'           => array( 'slug' => 'course-title' ),
+			)
+		);
+
+		register_taxonomy(
+			'course-level',
+			array( self::$slug ),
+			array(
+				'hierarchical'      => true,
+				'labels'            => array(
+					'name'              => __( 'Level', $plugin_data['TextDomain'] ),
+					'singular_name'     => __( 'Level', $plugin_data['TextDomain'] ),
+					'search_items'      => __( 'Search Levels', $plugin_data['TextDomain'] ),
+					'all_items'         => __( 'All Levels', $plugin_data['TextDomain'] ),
+					'parent_item'       => __( 'parent Level', $plugin_data['TextDomain'] ),
+					'parent_item_colon' => __( 'parent Level:', $plugin_data['TextDomain'] ),
+					'edit_item'         => __( 'Edit Level', $plugin_data['TextDomain'] ),
+					'update_item'       => __( 'Update Level', $plugin_data['TextDomain'] ),
+					'add_new_item'      => __( 'Add new Level', $plugin_data['TextDomain'] ),
+					'new_item_name'     => __( 'new Level Name', $plugin_data['TextDomain'] ),
+					'menu_name'         => __( 'Levels', $plugin_data['TextDomain'] ),
+				),
+				'show_ui'           => true,
+				'show_admin_column' => true,
+				'query_var'         => true,
+				'rewrite'           => array( 'slug' => 'course-level' ),
+			)
+		);
 	}
 
 
 	public static function all_by_category( $category = 0 ) {
 		$args    = array(
-			'post_type'   => 'course',
+			'post_type'   => self::$slug,
 			'numberposts' => -1,
 			'post_status' => 'publish',
 			'category'    => $category,
