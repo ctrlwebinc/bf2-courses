@@ -59,9 +59,9 @@ class Courses {
 	 * @param string $tag Tag.
 	 * @return string
 	 */
-	public function list( $atts = array(), $content = null, string $tag ) {
+	public static function list( $atts = array(), $content = null, string $tag ) {
 
-		$plugin_data = get_plugin_data( __FILE__ );
+		$plugin_data = get_plugin_data( BF2_COURSES_FILE );
 
 		$atts = array_change_key_case( (array) $atts, CASE_LOWER );
 

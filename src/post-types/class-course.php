@@ -52,12 +52,16 @@ class Course {
 	 * @return void
 	 */
 	public static function init_hooks() {
-		add_action( 'init', array( Course::class, 'init' ), 99 );
+		add_action( 'init', array( Course::class, 'init' ), 10 );
 		add_action( 'admin_init', array( Course::class, 'add_capabilities' ), 10 );
 		add_action( 'init', array( Course::class, 'register_taxonomies' ), 10 );
 		add_filter( 'post_updated_messages', array( Course::class, 'updated_messages' ), 10 );
 		add_action( 'cmb2_admin_init', array( Course::class, 'register_settings_metaboxes' ), 10 );
 		add_action( 'cmb2_admin_init', array( Course::class, 'register_cpt_metaboxes' ), 10 );
+
+		if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+			add_filter( 'product_type_selector', array( Course::class, 'add_badge_product' ) );
+		}
 	}
 
 
@@ -66,7 +70,10 @@ class Course {
 	 */
 	public static function init() {
 
-		$plugin_data          = get_plugin_data( __FILE__ );
+		// WooCommerce.
+		require_once plugin_dir_path( __FILE__ ) . '../woocommerce/class-product-type-course.php';
+
+		$plugin_data          = get_plugin_data( BF2_COURSES_FILE );
 		$badgefactor2_options = get_option( 'bf2_courses_settings' );
 
 		register_post_type(
@@ -105,7 +112,7 @@ class Course {
 				'show_in_nav_menus' => true,
 				'supports'          => array( 'title', 'editor' ),
 				'has_archive'       => ( isset( $badgefactor2_options['bf2_courses_use_archive'] ) && 'on' === $badgefactor2_options['bf2_courses_use_archive'] ),
-				'rewrite'           => true,
+				'rewrite'           => array( 'slug' => 'courses' ),
 				'query_var'         => true,
 				'menu_position'     => 51,
 				'menu_icon'         => BF2_BASEURL . 'assets/images/course.svg',
@@ -165,37 +172,37 @@ class Course {
 	 */
 	public static function add_capabilities() {
 		$capabilities = array(
-			'edit_' . self::$slug_plural           => array(
+			'edit_' . self::$slug_plural             => array(
 				'administrator',
 			),
-			'edit_other_' . self::$slug_plural     => array(
+			'edit_other_' . self::$slug_plural       => array(
 				'administrator',
 			),
-			'edit_published_' . self::$slug_plural => array(
+			'edit_published_' . self::$slug_plural   => array(
 				'administrator',
 			),
-			'publish_' . self::$slug_plural        => array(
+			'publish_' . self::$slug_plural          => array(
 				'administrator',
 			),
-			'delete_' . self::$slug                => array(
+			'delete_' . self::$slug_plural           => array(
 				'administrator',
 			),
-			'delete_others_' . self::$slug         => array(
+			'delete_others_' . self::$slug_plural    => array(
 				'administrator',
 			),
-			'delete_published_' . self::$slug      => array(
+			'delete_published_' . self::$slug_plural => array(
 				'administrator',
 			),
-			'delete_private_' . self::$slug        => array(
+			'delete_private_' . self::$slug_plural   => array(
 				'administrator',
 			),
-			'edit_private_' . self::$slug          => array(
+			'edit_private_' . self::$slug_plural     => array(
 				'administrator',
 			),
-			'read_private_' . self::$slug_plural   => array(
+			'read_private_' . self::$slug_plural     => array(
 				'administrator',
 			),
-			'read_' . self::$slug                  => array(
+			'read_' . self::$slug                    => array(
 				'administrator',
 			),
 		);
@@ -214,7 +221,7 @@ class Course {
 	 * Registers Add-On settings page.
 	 */
 	public static function register_settings_metaboxes() {
-		$plugin_data = get_plugin_data( __FILE__ );
+		$plugin_data = get_plugin_data( BF2_COURSES_FILE );
 
 		$args = array(
 			'id'           => 'bf2_courses_settings_page',
@@ -247,7 +254,7 @@ class Course {
 	 * Registers Add-On settings page.
 	 */
 	public static function register_cpt_metaboxes() {
-		$plugin_data = get_plugin_data( __FILE__ );
+		$plugin_data = get_plugin_data( BF2_COURSES_FILE );
 
 		$cmb = new_cmb2_box(
 			array(
@@ -280,7 +287,7 @@ class Course {
 	 * @return void
 	 */
 	public static function register_taxonomies() {
-		$plugin_data = get_plugin_data( __FILE__ );
+		$plugin_data = get_plugin_data( BF2_COURSES_FILE );
 
 		register_taxonomy(
 			'course-category',
@@ -386,5 +393,35 @@ class Course {
 		return $courses;
 	}
 
+	/**
+	 * Is the Course accessible by current user?
+	 *
+	 * @return boolean
+	 */
+	public static function is_accessible() {
+		return false;
+	}
+
+	/**
+	 * Is the Course purchasable by current user?
+	 *
+	 * @return boolean
+	 */
+	public static function is_purchasable() {
+		global $product;
+		$user          = get_current_user_id();
+		$has_purchased = $product &&
+			function_exists( 'wc_customer_bought_product' ) &&
+			wc_customer_bought_product( null, get_current_user_id(), $product->get_id() );
+
+		return ! $has_purchased;
+	}
+
+	public static function add_badge_product( $types ) {
+		$plugin_data = get_plugin_data( BF2_COURSES_FILE );
+
+		$types['course'] = __( 'Course', $plugin_data['TextDomain'] );
+		return $types;
+	}
 
 }
