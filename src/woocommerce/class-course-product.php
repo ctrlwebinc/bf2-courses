@@ -20,25 +20,10 @@
  * @package Badge_Factor_2
  *
  * @phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralDomain
- * @phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+ * @phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralContext
  */
 
-/*
- * You can override this template by copying it in your theme, in a
- * badgefactor2/ subdirectory, and modifying it there.
- */
-
-get_header();
-?>
-<main id="site-content" role="main">
-<?php if ( have_posts() ) : ?>
-	<?php while ( have_posts() ) : ?>
-		<?php the_post(); ?>
-		<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-		<?php echo $post->post_title; ?>
-		</article>
-	<?php endwhile; ?>
-<?php endif; ?>
-</main>
-<?php
-get_footer();
+class CourseProduct
+{
+	
+}

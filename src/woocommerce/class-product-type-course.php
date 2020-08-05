@@ -20,25 +20,29 @@
  * @package Badge_Factor_2
  *
  * @phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralDomain
- * @phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+ * @phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralContext
  */
 
-/*
- * You can override this template by copying it in your theme, in a
- * badgefactor2/ subdirectory, and modifying it there.
+/**
+ * Course WooCommerce Product Type.
  */
+class ProductTypeCourse extends \WC_Product {
 
-get_header();
-?>
-<main id="site-content" role="main">
-<?php if ( have_posts() ) : ?>
-	<?php while ( have_posts() ) : ?>
-		<?php the_post(); ?>
-		<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-		<?php echo $post->post_title; ?>
-		</article>
-	<?php endwhile; ?>
-<?php endif; ?>
-</main>
-<?php
-get_footer();
+
+	/**
+	 * Constructor.
+	 * @param int|WC_Product|object $product Product to init.
+	 */
+	public function __construct( $product ) {
+		parent::__construct( $product );
+		$this->product_type = $this->get_type();
+	}
+
+	/**
+	 * Get internal type.
+	 * @return string
+	 */
+	public function get_type() {
+		return 'course';
+	}
+}

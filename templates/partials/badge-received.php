@@ -22,23 +22,15 @@
  * @phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralDomain
  * @phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
  */
-
-/*
- * You can override this template by copying it in your theme, in a
- * badgefactor2/ subdirectory, and modifying it there.
- */
-
-get_header();
 ?>
-<main id="site-content" role="main">
-<?php if ( have_posts() ) : ?>
-	<?php while ( have_posts() ) : ?>
-		<?php the_post(); ?>
-		<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-		<?php echo $post->post_title; ?>
-		</article>
-	<?php endwhile; ?>
-<?php endif; ?>
-</main>
-<?php
-get_footer();
+<div class="status">
+	<?php
+	echo sprintf(
+		// translators: Link to badge page, badge page title and issued date.
+		__( 'You have received the badge <a href="%1$s">%2$s</a> on %3$s', $plugin_data['TextDomain'] ),
+		get_permalink( $badge_page->ID ),
+		$badge_page->post_title,
+		$issued_on
+	);
+	?>
+</div>
