@@ -26,23 +26,25 @@
 /**
  * Course WooCommerce Product Type.
  */
-class ProductTypeCourse extends \WC_Product {
+if ( function_exists( 'wc_customer_bought_product' ) ) {
+	class ProductTypeCourse extends \WC_Product {
 
 
-	/**
-	 * Constructor.
-	 * @param int|WC_Product|object $product Product to init.
-	 */
-	public function __construct( $product ) {
-		parent::__construct( $product );
-		$this->product_type = $this->get_type();
-	}
+		/**
+		 * Constructor.
+		 * @param int|WC_Product|object $product Product to init.
+		 */
+		public function __construct( $product ) {
+			parent::__construct( $product );
+			$this->product_type = $this->get_type();
+		}
 
-	/**
-	 * Get internal type.
-	 * @return string
-	 */
-	public function get_type() {
-		return 'course';
+		/**
+		 * Get internal type.
+		 * @return string
+		 */
+		public function get_type() {
+			return 'course';
+		}
 	}
 }
