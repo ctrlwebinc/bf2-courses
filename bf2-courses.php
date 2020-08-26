@@ -70,6 +70,14 @@ add_action(
 	}
 );
 
+add_action(
+	'wp_enqueue_scripts',
+	function () {
+		$plugin_data = get_plugin_data( BF2_COURSES_FILE );
+		wp_enqueue_style( 'bf2-courses-public-css', plugin_dir_url( __FILE__ ) . '/assets/css/public.css', array(), $plugin_data['Version'], 'all' );
+	}
+);
+ 
 
 // Templates management.
 add_action(
