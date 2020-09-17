@@ -77,7 +77,7 @@ class BadgePage_Course_Extension {
 	 * @return void
 	 */
 	public static function save_badge_page( $post_id, $post, $update ) {
-		if ( $update ) {
+		if ( $update && 'badge-page' === $post->post_type ) {
 			$create_course = get_post_meta( $post_id, 'course', true );
 			if ( 'on' === $create_course ) {
 				// insert the post and set the category

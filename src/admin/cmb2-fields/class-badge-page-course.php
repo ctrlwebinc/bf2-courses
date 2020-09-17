@@ -59,7 +59,7 @@ class Badge_Page_Course {
 					'name'  => $field_type_object->_name(),
 					'id'    => $field_type_object->_id(),
 					'value' => 'on',
-					'desc'  => __( 'Create course?', BF2_DATA['TextDomain'] ),
+					'desc'  => __( 'Create course?', BF2_COURSES_DATA['TextDomain'] ),
 				)
 			);
 
@@ -67,8 +67,12 @@ class Badge_Page_Course {
 			// The field has been filled automatically, show link.
 
 			$course = get_post( $badge_page_course );
-			echo sprintf( '<a href="/wp-admin/post.php?post=%d&action=edit">%s</a>', $badge_page_course, $course->post_title );
-			echo sprintf( '<input type="hidden" name="course" value="%s">', $badge_page_course );
+			if ( 'on' !== $badge_page_course ) {
+				echo sprintf( '<a href="/wp-admin/post.php?post=%d&action=edit">%s</a>', $badge_page_course, $course->post_title );
+				echo sprintf( '<input type="hidden" name="course" value="%s">', $badge_page_course );
+			} else {
+				echo __( 'Link problem', BF2_COURSES_DATA['TextDomain'] );
+			}
 		}
 	}
 }
