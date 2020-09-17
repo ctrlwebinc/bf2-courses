@@ -96,7 +96,7 @@ get_header();
 					<img class="badge-image" src="<?php echo $badge->image; ?>" alt="<?php echo $badge->name; ?>">
 					<div class="badge-issued">
 						<h3 class="badge-issued-title">
-							<?php echo __( 'Issued by', BF2_DATA['TextDomain'] ); ?>
+							<?php echo __( 'Issued by', BF2_COURSES_DATA['TextDomain'] ); ?>
 							<a target="_blank" href="<?php echo $issuer->url; ?>"><?php echo $issuer->name; ?></a>
 						</h3>
 					</div>
@@ -109,12 +109,10 @@ get_header();
 							<?php endif; ?>
 						</div>
 					</div>
-					
 				</div>
 			</div>
 		</div>
 	</section>
-	
 </main>
 
 <?php

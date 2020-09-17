@@ -269,12 +269,15 @@ class Course {
 
 		$cmb->add_field(
 			array(
-				'id'      => 'course_badge_page',
-				'name'    => __( 'Badge Page', $plugin_data['TextDomain'] ),
-				'desc'    => __( 'Badge Page associated with this Course', $plugin_data['TextDomain'] ),
-				'type'    => 'pw_select',
-				'style'   => 'width: 200px',
-				'options' => BadgePage::select_options(),
+				'id'         => 'course_badge_page',
+				'name'       => __( 'Badge Page', $plugin_data['TextDomain'] ),
+				'desc'       => __( 'Badge Page associated with this Course', $plugin_data['TextDomain'] ),
+				'type'       => 'pw_select',
+				'style'      => 'width: 200px',
+				'options'    => BadgePage::select_options(),
+				'attributes' => array(
+					'required' => 'required',
+				),
 			)
 		);
 
