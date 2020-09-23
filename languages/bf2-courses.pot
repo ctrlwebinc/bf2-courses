@@ -1,0 +1,369 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Badge Factor 2 - Courses Addon\n"
+"POT-Creation-Date: 2020-09-23 06:46-0400\n"
+"PO-Revision-Date: 2020-09-23 06:46-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: bf2-courses.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: src/admin/cmb2-fields/class-badge-page-course.php:62
+msgid "Create course?"
+msgstr ""
+
+#: src/admin/cmb2-fields/class-badge-page-course.php:74
+msgid "Link problem"
+msgstr ""
+
+#: src/post-types/class-badgepage-course-extension.php:56
+#: src/post-types/class-course.php:84 src/post-types/class-course.php:426
+msgid "Course"
+msgstr ""
+
+#: src/post-types/class-course.php:83 src/post-types/class-course.php:107
+#: src/post-types/class-course.php:228 src/post-types/class-course.php:233
+msgid "Courses"
+msgstr ""
+
+#: src/post-types/class-course.php:85
+msgid "All Courses"
+msgstr ""
+
+#: src/post-types/class-course.php:86
+msgid "Course Archives"
+msgstr ""
+
+#: src/post-types/class-course.php:87
+msgid "Course Attributes"
+msgstr ""
+
+#: src/post-types/class-course.php:88
+msgid "Insert into Course"
+msgstr ""
+
+#: src/post-types/class-course.php:89
+msgid "Uploaded to this Course"
+msgstr ""
+
+#: src/post-types/class-course.php:94
+msgid "Filter Courses list"
+msgstr ""
+
+#: src/post-types/class-course.php:95
+msgid "Courses list navigation"
+msgstr ""
+
+#: src/post-types/class-course.php:96
+msgid "Courses list"
+msgstr ""
+
+#: src/post-types/class-course.php:97
+msgid "New Course"
+msgstr ""
+
+#: src/post-types/class-course.php:98
+msgid "Add New"
+msgstr ""
+
+#: src/post-types/class-course.php:99
+msgid "Add New Course"
+msgstr ""
+
+#: src/post-types/class-course.php:100
+msgid "Edit Course"
+msgstr ""
+
+#: src/post-types/class-course.php:101
+msgid "View Course"
+msgstr ""
+
+#: src/post-types/class-course.php:102
+msgid "View Courses"
+msgstr ""
+
+#: src/post-types/class-course.php:103
+msgid "Search Courses"
+msgstr ""
+
+#: src/post-types/class-course.php:104
+msgid "No Courses found"
+msgstr ""
+
+#: src/post-types/class-course.php:105
+msgid "No Courses found in trash"
+msgstr ""
+
+#: src/post-types/class-course.php:106
+msgid "Parent Course:"
+msgstr ""
+
+#. translators: %s: post permalink
+#: src/post-types/class-course.php:143
+#, php-format
+msgid "Course updated. <a target=\"_blank\" href=\"%s\">View Course</a>"
+msgstr ""
+
+#: src/post-types/class-course.php:144
+msgid "Custom field updated."
+msgstr ""
+
+#: src/post-types/class-course.php:145
+msgid "Custom field deleted."
+msgstr ""
+
+#: src/post-types/class-course.php:146
+msgid "Course updated."
+msgstr ""
+
+#. translators: %s: date and time of the revision
+#: src/post-types/class-course.php:148
+#, php-format
+msgid "Course restored to revision from %s"
+msgstr ""
+
+#. translators: %s: post permalink
+#: src/post-types/class-course.php:150
+#, php-format
+msgid "Course published. <a href=\"%s\">View Course</a>"
+msgstr ""
+
+#: src/post-types/class-course.php:151
+msgid "Course saved."
+msgstr ""
+
+#. translators: %s: post permalink
+#: src/post-types/class-course.php:153
+#, php-format
+msgid "Course submitted. <a target=\"_blank\" href=\"%s\">Preview Course</a>"
+msgstr ""
+
+#. translators: 1: Publish box date format, see https://secure.php.net/date 2: Post permalink
+#: src/post-types/class-course.php:156
+#, php-format
+msgid ""
+"Course scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
+"\">Preview Course</a>"
+msgstr ""
+
+#: src/post-types/class-course.php:157
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#. translators: %s: post permalink
+#: src/post-types/class-course.php:161
+#, php-format
+msgid ""
+"Course draft updated. <a target=\"_blank\" href=\"%s\">Preview Course</a>"
+msgstr ""
+
+#: src/post-types/class-course.php:245
+msgid "Use Courses Archive?"
+msgstr ""
+
+#: src/post-types/class-course.php:246
+msgid ""
+"If you enable this, a course archive will be automatically created. When you "
+"modify this, you need to flush your rewrite rules."
+msgstr ""
+
+#: src/post-types/class-course.php:262
+msgid "Links"
+msgstr ""
+
+#: src/post-types/class-course.php:273
+msgid "Badge Page"
+msgstr ""
+
+#: src/post-types/class-course.php:274
+msgid "Badge Page associated with this Course"
+msgstr ""
+
+#: src/post-types/class-course.php:301 src/post-types/class-course.php:302
+msgid "Category"
+msgstr ""
+
+#: src/post-types/class-course.php:303
+msgid "Search Categories"
+msgstr ""
+
+#: src/post-types/class-course.php:304
+msgid "All Categories"
+msgstr ""
+
+#: src/post-types/class-course.php:305
+msgid "parent Category"
+msgstr ""
+
+#: src/post-types/class-course.php:306
+msgid "parent Category:"
+msgstr ""
+
+#: src/post-types/class-course.php:307
+msgid "Edit Category"
+msgstr ""
+
+#: src/post-types/class-course.php:308
+msgid "Update Category"
+msgstr ""
+
+#: src/post-types/class-course.php:309
+msgid "Add new Category"
+msgstr ""
+
+#: src/post-types/class-course.php:310
+msgid "new Category Name"
+msgstr ""
+
+#: src/post-types/class-course.php:311
+msgid "Categories"
+msgstr ""
+
+#: src/post-types/class-course.php:326 src/post-types/class-course.php:327
+msgid "Title"
+msgstr ""
+
+#: src/post-types/class-course.php:328
+msgid "Search Titles"
+msgstr ""
+
+#: src/post-types/class-course.php:329
+msgid "All Titles"
+msgstr ""
+
+#: src/post-types/class-course.php:330
+msgid "parent Title"
+msgstr ""
+
+#: src/post-types/class-course.php:331
+msgid "parent Title:"
+msgstr ""
+
+#: src/post-types/class-course.php:332
+msgid "Edit Title"
+msgstr ""
+
+#: src/post-types/class-course.php:333
+msgid "Update Title"
+msgstr ""
+
+#: src/post-types/class-course.php:334
+msgid "Add new Title"
+msgstr ""
+
+#: src/post-types/class-course.php:335
+msgid "new Title Name"
+msgstr ""
+
+#: src/post-types/class-course.php:336
+msgid "Titles"
+msgstr ""
+
+#: src/post-types/class-course.php:351 src/post-types/class-course.php:352
+msgid "Level"
+msgstr ""
+
+#: src/post-types/class-course.php:353
+msgid "Search Levels"
+msgstr ""
+
+#: src/post-types/class-course.php:354
+msgid "All Levels"
+msgstr ""
+
+#: src/post-types/class-course.php:355
+msgid "parent Level"
+msgstr ""
+
+#: src/post-types/class-course.php:356
+msgid "parent Level:"
+msgstr ""
+
+#: src/post-types/class-course.php:357
+msgid "Edit Level"
+msgstr ""
+
+#: src/post-types/class-course.php:358
+msgid "Update Level"
+msgstr ""
+
+#: src/post-types/class-course.php:359
+msgid "Add new Level"
+msgstr ""
+
+#: src/post-types/class-course.php:360
+msgid "new Level Name"
+msgstr ""
+
+#: src/post-types/class-course.php:361
+msgid "Levels"
+msgstr ""
+
+#: src/public/shortcodes/class-courses.php:73
+msgid "Filter by type"
+msgstr ""
+
+#: src/public/shortcodes/class-courses.php:111
+msgid "All"
+msgstr ""
+
+#: src/public/shortcodes/class-courses.php:125
+msgid "There are no courses currently available in this category."
+msgstr ""
+
+#: src/public/shortcodes/class-courses.php:125
+msgid "There are no courses currently available."
+msgstr ""
+
+#: src/public/shortcodes/class-courses.php:159
+msgid "No badge issued for this course"
+msgstr ""
+
+#. translators: Link to badge page, badge page title and issued date.
+#: templates/partials/badge-received.php:30
+#, php-format
+msgid "You have received the badge <a href=\"%1$s\">%2$s</a> on %3$s"
+msgstr ""
+
+#: templates/tpl.course.php:99
+msgid "Issued by"
+msgstr ""
+
+#: templates/tpl.course.php:108
+msgid "Request this badge"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Badge Factor 2 - Courses Addon"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/ctrlwebinc/bf2-courses"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Adds Courses to Badge Factor 2, and if WooCommerce is installed, adds "
+"Courses to WooCommerce as well."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "ctrlweb"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://badgefactor2.com/"
+msgstr ""
