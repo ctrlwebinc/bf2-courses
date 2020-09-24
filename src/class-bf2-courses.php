@@ -42,7 +42,7 @@ class BF2_Courses {
 	/**
 	 * The single instance of the class.
 	 *
-	 * @var BadgeFactor2
+	 * @var BF2_Courses
 	 * @since 2.0.0-alpha
 	 */
 	protected static $_instance = null;

@@ -37,6 +37,8 @@ use BadgeFactor2\BF2_Courses;
 
 defined( 'ABSPATH' ) || exit;
 
+load_plugin_textdomain( 'bf2-courses', false, basename( dirname( __FILE__ ) ) . '/languages' );
+
 // Define BF2_FILE.
 if ( ! defined( 'BF2_COURSES_FILE' ) ) {
 	define( 'BF2_COURSES_FILE', __FILE__ );
@@ -45,7 +47,7 @@ if ( ! defined( 'BF2_COURSES_FILE' ) ) {
 // Deactivate if BadgeFactor2 is not active.
 if ( ! class_exists( 'BadgeFactor2\BadgeFactor2' ) || ! \BadgeFactor2\BadgeFactor2::is_initialized() ) {
 	deactivate_plugins( plugin_dir_path( __FILE__ ) . '/bf2-courses.php' );
-	exit;
+	die( __( 'This plugin requires Badge Factor 2.', 'bf2-courses' ) );
 }
 
 // Include the main BF2 Courses class.
@@ -66,4 +68,3 @@ function bf2_courses() {
 // Global for backwards compatibility.
 $GLOBALS['badgefactor2']->courses = bf2_courses();
 
-load_plugin_textdomain( 'bf2-courses', false, basename( dirname( __FILE__ ) ) . '/languages' );
