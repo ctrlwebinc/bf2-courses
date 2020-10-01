@@ -25,7 +25,7 @@
 namespace BadgeFactor2\Admin\CMB2_Fields;
 
 /**
- * CMB2 Badge Request Approver Field.
+ * CMB2 Badge Page Course Field.
  */
 class Badge_Page_Course {
 

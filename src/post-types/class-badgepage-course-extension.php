@@ -27,7 +27,7 @@
 namespace BadgeFactor2\Post_Types;
 
 /**
- * Badge Page post type.
+ * Badge Page post type (Course extension).
  */
 class BadgePage_Course_Extension {
 
