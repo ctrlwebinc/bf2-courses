@@ -36,36 +36,50 @@ $form_slug = $options['bf2_form_slug'];
 $current_user = wp_get_current_user();
 $badgr_user   = new BadgrUser( $current_user );
 
-$course            = $post;
-$badge_page        = get_post( get_post_meta( $course->ID, 'course_badge_page', true ) );
-$form_type         = get_post_meta( $badge_page->ID, 'badge_request_form_type', true );
-// $badge_entity_id = get_post_meta( $badge_page->ID, 'badgepage_badge', true );
+$course  = $post;
 
-$badge_page_id     = get_post_meta($post->ID, 'course_badge_page', true ); 
-$badge_entity_id   = get_post_meta($badge_page_id, 'badge', true);
-$badge             = BadgeFactor2\Models\BadgeClass::get( $badge_entity_id );
-$issuer            = BadgeFactor2\Models\Issuer::get( $badge->issuer );
+// The WooCommerce add-on is installed.
+if ( class_exists( 'BadgeFactor2\BF2_WooCommerce' ) ) {
+	// A product is linked to the course.
+	$product_id = get_post_meta( $post->ID, 'course_product', true );
+	if ( $product_id ) {
+		// The client has not purchased this product, redirect to the product page.
+		if ( ! wc_customer_bought_product( $current_user->user_email, $current_user->ID, $product_id ) ) {
+			wp_redirect( get_permalink( $product_id ) ); 
+			exit;
+		}
+	}
+}
 
-// $backpack          = BadgrProvider::get_all_assertions_from_user_backpack( $badgr_user );
+$badge_page      = get_post( get_post_meta( $course->ID, 'course_badge_page', true ) );
+$form_type       = get_post_meta( $badge_page->ID, 'badge_request_form_type', true );
+$badge_entity_id = get_post_meta( $badge_page->ID, 'badgepage_badge', true );
+
+$badge_page_id   = get_post_meta( $post->ID, 'course_badge_page', true );
+$badge_entity_id = get_post_meta( $badge_page_id, 'badge', true );
+$badge           = BadgeFactor2\Models\BadgeClass::get( $badge_entity_id );
+$issuer          = BadgeFactor2\Models\Issuer::get( $badge->issuer );
+
+$backpack = BadgrProvider::get_all_assertions_from_user_backpack( $badgr_user );
 
 $assertion         = null;
 $issued            = false;
 $revoked           = false;
 $issued_on         = null;
-$course_categories = wp_get_post_terms($course->ID, 'course-category', array("fields" => "all"));
-$course_titles 	   = wp_get_post_terms($course->ID, 'course-title', array("fields" => "all"));
-$course_level 	   = wp_get_post_terms($course->ID, 'course-level', array("fields" => "all"));
+$course_categories = wp_get_post_terms( $course->ID, 'course-category', array( 'fields' => 'all' ) );
+$course_titles     = wp_get_post_terms( $course->ID, 'course-title', array( 'fields' => 'all' ) );
+$course_level      = wp_get_post_terms( $course->ID, 'course-level', array( 'fields' => 'all' ) );
 
 
-// foreach ( $backpack as $item ) {
-// 	if ( $item->badgeclass === $badge_entity_id ) {
-// 		$assertion = $item;
-// 		$issued    = true;
-// 		$revoked   = $assertion->revoked;
-// 		$issued_on = gmdate( 'Y-m-d', strtotime( $assertion->issuedOn ) );
-// 		break;
-// 	}
-// }
+foreach ( $backpack as $item ) {
+	if ( $item->badgeclass === $badge_entity_id ) {
+		$assertion = $item;
+		$issued    = true;
+		$revoked   = $assertion->revoked;
+		$issued_on = gmdate( 'Y-m-d', strtotime( $assertion->issuedOn ) );
+		break;
+	}
+}
 
 ?>
 <?php
