@@ -28,15 +28,12 @@ use BadgeFactor2\BadgrProvider;
 use BadgeFactor2\BadgrUser;
 use BadgeFactor2\Helpers\Template;
 
-$plugin_data = get_plugin_data( BF2_COURSES_FILE );
-
-$options   = get_option( 'badgefactor2' );
-$form_slug = $options['bf2_form_slug'];
-
+$plugin_data  = get_plugin_data( BF2_COURSES_FILE );
+$options      = get_option( 'badgefactor2' );
+$form_slug    = $options['bf2_form_slug'];
 $current_user = wp_get_current_user();
 $badgr_user   = new BadgrUser( $current_user );
-
-$course  = $post;
+$course       = $post;
 
 // The WooCommerce add-on is installed.
 if ( class_exists( 'BadgeFactor2\BF2_WooCommerce' ) ) {
@@ -45,7 +42,7 @@ if ( class_exists( 'BadgeFactor2\BF2_WooCommerce' ) ) {
 	if ( $product_id ) {
 		// The client has not purchased this product, redirect to the product page.
 		if ( ! wc_customer_bought_product( $current_user->user_email, $current_user->ID, $product_id ) ) {
-			wp_redirect( get_permalink( $product_id ) ); 
+			echo sprintf( '<script>window.location.replace("%s")</script>', get_permalink( $product_id ) );
 			exit;
 		}
 	}
