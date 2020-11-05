@@ -39,6 +39,7 @@ class BadgePage_Course_Extension {
 	public static function init_hooks() {
 		add_action( 'cmb2_admin_init', array( self::class, 'register_cpt_metaboxes' ), 20 );
 		add_action( 'save_post', array( self::class, 'save_badge_page' ), 12, 3 );
+		//add_action( 'cmb2_save')
 	}
 
 	/**

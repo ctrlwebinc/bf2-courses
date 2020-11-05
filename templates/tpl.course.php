@@ -28,9 +28,12 @@ use BadgeFactor2\BadgrProvider;
 use BadgeFactor2\BadgrUser;
 use BadgeFactor2\Helpers\Template;
 
-$plugin_data  = get_plugin_data( BF2_COURSES_FILE );
-$options      = get_option( 'badgefactor2' );
-$form_slug    = $options['bf2_form_slug'];
+$plugin_data = get_plugin_data( BF2_COURSES_FILE );
+$options     = get_option( 'badgefactor2' );
+
+$form_slug                = ! empty( $options['bf2_form_slug'] ) ? $options['bf2_form_slug'] : 'form';
+$autoevaluation_form_slug = ! empty( $options['bf2_autoevaluation_form_slug'] ) ? $options['bf2_autoevaluation_form_slug'] : 'autoevaluation';
+
 $current_user = wp_get_current_user();
 $badgr_user   = new BadgrUser( $current_user );
 $course       = $post;
@@ -43,19 +46,21 @@ if ( class_exists( 'BadgeFactor2\BF2_WooCommerce' ) ) {
 		// The client has not purchased this product, redirect to the product page.
 		if ( ! wc_customer_bought_product( $current_user->user_email, $current_user->ID, $product_id ) ) {
 			echo sprintf( '<script>window.location.replace("%s")</script>', get_permalink( $product_id ) );
-			exit;
+			die;
 		}
 	}
 }
 
 $badge_page      = get_post( get_post_meta( $course->ID, 'course_badge_page', true ) );
-$form_type       = get_post_meta( $badge_page->ID, 'badge_request_form_type', true );
 $badge_entity_id = get_post_meta( $badge_page->ID, 'badgepage_badge', true );
-
 $badge_page_id   = get_post_meta( $post->ID, 'course_badge_page', true );
 $badge_entity_id = get_post_meta( $badge_page_id, 'badge', true );
 $badge           = BadgeFactor2\Models\BadgeClass::get( $badge_entity_id );
 $issuer          = BadgeFactor2\Models\Issuer::get( $badge->issuer );
+
+$autoevaluation_form = is_plugin_active( 'bf2-gravityforms/bf2-gravityforms.php' ) ? get_post_meta( $badge_page->ID, 'autoevaluation_form_id', true ) : '';
+
+$form_type = get_post_meta( $badge_page->ID, 'badge_request_form_type', true );
 
 $backpack = BadgrProvider::get_all_assertions_from_user_backpack( $badgr_user );
 
@@ -115,6 +120,8 @@ get_header();
 						<div class="badge-actions-course">
 							<?php if ( false && $assertion && ! $assertion->revoked ) : ?>
 								<?php include( Template::locate( 'partials/badge-received', null, 'bf2-courses' ) ); ?>
+							<?php elseif ( $autoevaluation_form ) : ?>
+								<a class="btn" href="<?php echo get_permalink( $badge_page->ID ) . $autoevaluation_form_slug . '/' . $form_slug; ?>"><?php echo __( 'Autoevaluation form', $plugin_data['TextDomain'] ); ?></a>
 							<?php else : ?>
 								<a class="btn" href="<?php echo get_permalink( $badge_page->ID ) . $form_slug; ?>"><?php echo __( 'Request this badge', $plugin_data['TextDomain'] ); ?></a>
 							<?php endif; ?>
