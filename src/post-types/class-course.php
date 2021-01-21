@@ -52,15 +52,14 @@ class Course {
 	 * @return void
 	 */
 	public static function init_hooks() {
-		add_action( 'init', array( Course::class, 'init' ), 10 );
-		add_action( 'admin_init', array( Course::class, 'add_capabilities' ), 10 );
-		add_action( 'init', array( Course::class, 'register_taxonomies' ), 10 );
-		add_filter( 'post_updated_messages', array( Course::class, 'updated_messages' ), 10 );
-		add_action( 'cmb2_admin_init', array( Course::class, 'register_settings_metaboxes' ), 10 );
-		add_action( 'cmb2_admin_init', array( Course::class, 'register_cpt_metaboxes' ), 10 );
+		add_action( 'init', array( self::class, 'init' ), 10 );
+		add_action( 'admin_init', array( self::class, 'add_capabilities' ), 10 );
+		add_action( 'init', array( self::class, 'register_taxonomies' ), 10 );
+		add_filter( 'post_updated_messages', array( self::class, 'updated_messages' ), 10 );
+		add_action( 'cmb2_admin_init', array( self::class, 'register_cpt_metaboxes' ), 10 );
 
 		if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
-			add_filter( 'product_type_selector', array( Course::class, 'add_badge_product' ) );
+			add_filter( 'product_type_selector', array( self::class, 'add_badge_product' ) );
 		}
 	}
 
@@ -217,38 +216,7 @@ class Course {
 	}
 
 
-	/**
-	 * Registers Add-On settings page.
-	 */
-	public static function register_settings_metaboxes() {
-		$plugin_data = get_plugin_data( BF2_COURSES_FILE );
-
-		$args = array(
-			'id'           => 'bf2_courses_settings_page',
-			'menu_title'   => __( 'Courses', $plugin_data['TextDomain'] ),
-			'object_types' => array( 'options-page' ),
-			'option_key'   => 'bf2_courses_settings',
-			'parent_slug'  => 'badgefactor2',
-			'tab_group'    => 'badgefactor2',
-			'tab_title'    => __( 'Courses', $plugin_data['TextDomain'] ),
-		);
-
-		// 'tab_group' property is supported in > 2.4.0.
-		if ( version_compare( CMB2_VERSION, '2.4.0' ) ) {
-			$args['display_cb'] = 'badgefactor2_options_display_with_tabs';
-		}
-
-		$plugins = new_cmb2_box( $args );
-
-		$plugins->add_field(
-			array(
-				'name' => __( 'Use Courses Archive?', $plugin_data['TextDomain'] ),
-				'desc' => __( 'If you enable this, a course archive will be automatically created. When you modify this, you need to flush your rewrite rules.', $plugin_data['TextDomain'] ),
-				'id'   => 'bf2_courses_use_archive',
-				'type' => 'checkbox',
-			)
-		);
-	}
+	
 
 	/**
 	 * Registers Add-On settings page.
@@ -281,6 +249,29 @@ class Course {
 			)
 		);
 
+		if ( self::uses_duration() ) {
+			$test =  cmb2_get_metabox('course_info');
+			$cmb = new_cmb2_box(
+				array(
+					'id'           => 'course_info',
+					'title'        => __( 'Additional info', $plugin_data['TextDomain'] ),
+					'object_types' => array( self::$slug ),
+					'context'      => 'side',
+					'priority'     => 'default',
+					'show_names'   => true,
+				)
+			);
+
+			$cmb->add_field(
+				array(
+					'id'   => 'course_duration',
+					'name' => __( 'Duration (in hours)', $plugin_data['TextDomain'] ),
+					'type' => 'text_small',
+					//'style'      => 'width: 200px',
+
+				)
+			);
+		}
 	}
 
 
@@ -420,11 +411,30 @@ class Course {
 		return ! $has_purchased;
 	}
 
-	public static function add_badge_product( $types ) {
-		$plugin_data = get_plugin_data( BF2_COURSES_FILE );
 
-		$types['course'] = __( 'Course', $plugin_data['TextDomain'] );
+	/**
+	 * Undocumented function.
+	 *
+	 * @param array $types
+	 * @return array
+	 */
+	public static function add_badge_product( $types ) {
+		if ( is_array( $types ) ) {
+			$plugin_data     = get_plugin_data( BF2_COURSES_FILE );
+			$types['course'] = __( 'Course', $plugin_data['TextDomain'] );
+		}
+
 		return $types;
+	}
+
+	/**
+	 * Are Courses using the Duration field?
+	 *
+	 * @return bool Whether or not Courses use the Duration field.
+	 */
+	public static function uses_duration() {
+		$duration = cmb2_get_option( 'bf2_courses_settings', 'bf2_courses_duration_active' );
+		return 'on' === $duration;
 	}
 
 }
