@@ -21,7 +21,7 @@
  *
  * Plugin Name: Badge Factor 2 - Courses Addon
  * Plugin URI: https://github.com/ctrlwebinc/bf2-courses
- * GitHub Plugin URI: https://ctrlwebinc/bf2-courses
+ * GitHub Plugin URI: https://github.com/ctrlwebinc/bf2-courses
  * Description: Adds Courses to Badge Factor 2, and if WooCommerce is installed, adds Courses to WooCommerce as well.
  * Author: ctrlweb
  * Version: 1.0.0

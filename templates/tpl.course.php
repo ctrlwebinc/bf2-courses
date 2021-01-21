@@ -121,7 +121,7 @@ get_header();
 							<?php if ( false && $assertion && ! $assertion->revoked ) : ?>
 								<?php include( Template::locate( 'partials/badge-received', null, 'bf2-courses' ) ); ?>
 							<?php elseif ( $autoevaluation_form ) : ?>
-								<a class="btn" href="<?php echo get_permalink( $badge_page->ID ) . $autoevaluation_form_slug . '/' . $form_slug; ?>"><?php echo __( 'Autoevaluation form', $plugin_data['TextDomain'] ); ?></a>
+								<a class="btn" href="<?php echo get_permalink( $badge_page->ID ) . $autoevaluation_form_slug; ?>"><?php echo __( 'Autoevaluation form', $plugin_data['TextDomain'] ); ?></a>
 							<?php else : ?>
 								<a class="btn" href="<?php echo get_permalink( $badge_page->ID ) . $form_slug; ?>"><?php echo __( 'Request this badge', $plugin_data['TextDomain'] ); ?></a>
 							<?php endif; ?>
