@@ -216,8 +216,6 @@ class Course {
 	}
 
 
-	
-
 	/**
 	 * Registers Add-On settings page.
 	 */
@@ -250,8 +248,8 @@ class Course {
 		);
 
 		if ( self::uses_duration() ) {
-			$test =  cmb2_get_metabox('course_info');
-			$cmb = new_cmb2_box(
+			$test = cmb2_get_metabox( 'course_info' );
+			$cmb  = new_cmb2_box(
 				array(
 					'id'           => 'course_info',
 					'title'        => __( 'Additional info', $plugin_data['TextDomain'] ),
@@ -435,6 +433,41 @@ class Course {
 	public static function uses_duration() {
 		$duration = cmb2_get_option( 'bf2_courses_settings', 'bf2_courses_duration_active' );
 		return 'on' === $duration;
+	}
+
+
+	public static function get_by_badge_slug( $badge_slug ) {
+		global $wpdb;
+
+		$id = $wpdb->get_var(
+			$wpdb->prepare(
+				'SELECT p.ID 
+				FROM wp_posts p 
+				JOIN wp_postmeta pm 
+				ON p.ID = pm.post_id 
+				WHERE p.post_type = "course" 
+				AND pm.meta_key = "course_badge_page"
+				AND pm.meta_value IN (
+					SELECT ID 
+					FROM wp_posts p2
+					JOIN wp_postmeta pm2 
+					ON p2.ID = pm2.post_id
+					WHERE p2.post_type = "badge-page" 
+					AND pm2.meta_key = "badge"
+					AND pm2.meta_value IN (
+						SELECT pm3.meta_value 
+						FROM wp_posts p3
+						JOIN wp_postmeta pm3 
+						ON p3.ID = pm3.post_id
+						WHERE p3.post_name = %s
+					)
+				)
+				LIMIT 1',
+				$badge_slug
+			)
+		);
+		return get_post( $id );
+
 	}
 
 }
