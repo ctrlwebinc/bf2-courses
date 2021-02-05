@@ -25,6 +25,7 @@
 
 namespace BadgeFactor2;
 
+use BadgeFactor2\Controllers\Course_Controller;
 use BadgeFactor2\Helpers\Template;
 
 /**
@@ -34,7 +35,8 @@ class Courses_Public {
 
 	public static function init_hooks() {	
 		add_action( 'wp_enqueue_scripts', array( self::class, 'wp_euqueue_scripts' ) );
-		add_action( 'template_redirect', array( self::class, 'template_redirect' ) );
+		add_filter( 'archive_template', array( Course_Controller::class, 'archive' ) );
+		add_filter( 'single_template', array( Course_Controller::class, 'single' ) );
 	}
 
 	/**
@@ -73,7 +75,7 @@ class Courses_Public {
 			add_filter(
 				'template_include',
 				function () {
-					return Template::locate( 'tpl.course', null, 'bf2-courses' );
+					return Template::locate( 'tpl.course' );
 				}
 			);
 		}
@@ -81,7 +83,7 @@ class Courses_Public {
 			add_filter(
 				'template_include',
 				function () {
-					return Template::locate( 'tpl.courses', null, 'bf2-courses' );
+					return Template::locate( 'tpl.courses' );
 				}
 			);
 		}

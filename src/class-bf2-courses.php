@@ -102,6 +102,7 @@ class BF2_Courses {
 	 * @return void
 	 */
 	public function includes() {
+		require_once plugin_dir_path( __FILE__ ) . 'controllers/class-course-controller.php';
 		require_once plugin_dir_path( __FILE__ ) . 'post-types/class-course.php';
 		require_once plugin_dir_path( __FILE__ ) . 'post-types/class-badgepage-course-extension.php';
 		require_once plugin_dir_path( __FILE__ ) . 'public/class-courses-public.php';
