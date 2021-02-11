@@ -388,9 +388,11 @@ class Course {
 	/**
 	 * Is the Course accessible by current user?
 	 *
+	 * @param int $course_id Course ID.
 	 * @return boolean
 	 */
-	public static function is_accessible() {
+	public static function is_accessible( $course_id ) {
+		// FIXME Implement.
 		return false;
 	}
 
@@ -399,7 +401,7 @@ class Course {
 	 *
 	 * @return boolean
 	 */
-	public static function is_purchasable() {
+	public static function is_purchasable( $course_id ) {
 		global $product;
 		$user          = get_current_user_id();
 		$has_purchased = $product &&
