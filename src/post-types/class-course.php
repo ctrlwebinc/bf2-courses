@@ -230,6 +230,7 @@ class Course {
 				'context'      => 'normal',
 				'priority'     => 'high',
 				'show_names'   => true,
+				'capability'   => 'manage_badgr',
 			)
 		);
 
@@ -257,6 +258,7 @@ class Course {
 					'context'      => 'side',
 					'priority'     => 'default',
 					'show_names'   => true,
+					'capability'   => 'manage_badgr',
 				)
 			);
 

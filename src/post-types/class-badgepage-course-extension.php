@@ -59,6 +59,7 @@ class BadgePage_Course_Extension {
 				'context'      => 'side',
 				'priority'     => 'default',
 				'show_names'   => true,
+				'capability'   => 'manage_badgr',
 			)
 		);
 
