@@ -76,12 +76,13 @@ class Course_Controller extends Page_Controller {
 				if ( $product_id ) {
 					// The client has not purchased this product, redirect to the product page.
 					if ( ! wc_customer_bought_product( $current_user->user_email, $current_user->ID, $product_id ) ) {
-						echo sprintf( '<script>window.location.replace("%s")</script>', get_permalink( $product_id ) );
+						$badgepage_id = get_post_meta( $post->ID, 'course_badge_page', true );
+						echo sprintf( '<script>window.location.replace("%s")</script>', get_permalink( $badgepage_id ) );
 						die;
 					}
 				}
 			}
-			
+
 			$options     = get_option( 'badgefactor2' );
 
 			$fields = array();
