@@ -1,0 +1,392 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Badge Factor 2 - Courses Addon\n"
+"POT-Creation-Date: 2021-04-09 10:20-0400\n"
+"PO-Revision-Date: 2021-04-11 13:47-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: bf2-courses.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: bf2-courses.php:50
+msgid "This plugin requires Badge Factor 2."
+msgstr "Cette extension nécessite Badge Factor 2."
+
+#: src/admin/class-courses-admin.php:65 src/admin/class-courses-admin.php:70
+#: src/post-types/class-course.php:82 src/post-types/class-course.php:106
+msgid "Courses"
+msgstr "Cours"
+
+#: src/admin/class-courses-admin.php:83
+msgid "Use Courses Archive?"
+msgstr "Utiliser l’archive de cours?"
+
+#: src/admin/class-courses-admin.php:84
+msgid ""
+"If you enable this, a course archive will be automatically created. When you "
+"modify this, you need to flush your rewrite rules."
+msgstr "Si vous activez ceci, une archive de cours sera automatiquement créée."
+
+#: src/admin/class-courses-admin.php:92
+msgid "Use Courses Duration?"
+msgstr "Utiliser les durées de cours?"
+
+#: src/admin/class-courses-admin.php:93
+msgid "If you enable this, a course duration field will be added to Courses."
+msgstr ""
+"Si vous activez ceci, un champ de durée de cours sera ajouté aux cours."
+
+#: src/admin/cmb2-fields/class-badge-page-course.php:62
+msgid "Create course?"
+msgstr "Créer cours?"
+
+#: src/admin/cmb2-fields/class-badge-page-course.php:74
+msgid "Link problem"
+msgstr "Problème de lien"
+
+#: src/post-types/class-badgepage-course-extension.php:57
+#: src/post-types/class-course.php:83 src/post-types/class-course.php:426
+msgid "Course"
+msgstr "Cours"
+
+#: src/post-types/class-course.php:84
+msgid "All Courses"
+msgstr "Tous les cours"
+
+#: src/post-types/class-course.php:85
+msgid "Course Archives"
+msgstr "Archive de cours"
+
+#: src/post-types/class-course.php:86
+msgid "Course Attributes"
+msgstr "Attributs de cours"
+
+#: src/post-types/class-course.php:87
+msgid "Insert into Course"
+msgstr "Insérer dans cours"
+
+#: src/post-types/class-course.php:88
+msgid "Uploaded to this Course"
+msgstr "Téléversé dans ce cours"
+
+#: src/post-types/class-course.php:93
+msgid "Filter Courses list"
+msgstr ""
+
+#: src/post-types/class-course.php:94
+msgid "Courses list navigation"
+msgstr ""
+
+#: src/post-types/class-course.php:95
+msgid "Courses list"
+msgstr ""
+
+#: src/post-types/class-course.php:96
+msgid "New Course"
+msgstr ""
+
+#: src/post-types/class-course.php:97
+msgid "Add New"
+msgstr ""
+
+#: src/post-types/class-course.php:98
+msgid "Add New Course"
+msgstr ""
+
+#: src/post-types/class-course.php:99
+msgid "Edit Course"
+msgstr ""
+
+#: src/post-types/class-course.php:100
+msgid "View Course"
+msgstr ""
+
+#: src/post-types/class-course.php:101
+msgid "View Courses"
+msgstr ""
+
+#: src/post-types/class-course.php:102
+msgid "Search Courses"
+msgstr ""
+
+#: src/post-types/class-course.php:103
+msgid "No Courses found"
+msgstr ""
+
+#: src/post-types/class-course.php:104
+msgid "No Courses found in trash"
+msgstr ""
+
+#: src/post-types/class-course.php:105
+msgid "Parent Course:"
+msgstr ""
+
+#. translators: %s: post permalink
+#: src/post-types/class-course.php:142
+#, php-format
+msgid "Course updated. <a target=\"_blank\" href=\"%s\">View Course</a>"
+msgstr ""
+
+#: src/post-types/class-course.php:143
+msgid "Custom field updated."
+msgstr ""
+
+#: src/post-types/class-course.php:144
+msgid "Custom field deleted."
+msgstr ""
+
+#: src/post-types/class-course.php:145
+msgid "Course updated."
+msgstr ""
+
+#. translators: %s: date and time of the revision
+#: src/post-types/class-course.php:147
+#, php-format
+msgid "Course restored to revision from %s"
+msgstr ""
+
+#. translators: %s: post permalink
+#: src/post-types/class-course.php:149
+#, php-format
+msgid "Course published. <a href=\"%s\">View Course</a>"
+msgstr ""
+
+#: src/post-types/class-course.php:150
+msgid "Course saved."
+msgstr ""
+
+#. translators: %s: post permalink
+#: src/post-types/class-course.php:152
+#, php-format
+msgid "Course submitted. <a target=\"_blank\" href=\"%s\">Preview Course</a>"
+msgstr ""
+
+#. translators: 1: Publish box date format, see https://secure.php.net/date 2: Post permalink
+#: src/post-types/class-course.php:155
+#, php-format
+msgid ""
+"Course scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
+"\">Preview Course</a>"
+msgstr ""
+
+#: src/post-types/class-course.php:156
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#. translators: %s: post permalink
+#: src/post-types/class-course.php:160
+#, php-format
+msgid ""
+"Course draft updated. <a target=\"_blank\" href=\"%s\">Preview Course</a>"
+msgstr ""
+
+#: src/post-types/class-course.php:228
+msgid "Links"
+msgstr ""
+
+#: src/post-types/class-course.php:240
+msgid "Badge Page"
+msgstr ""
+
+#: src/post-types/class-course.php:241
+msgid "Badge Page associated with this Course"
+msgstr ""
+
+#: src/post-types/class-course.php:256
+msgid "Additional info"
+msgstr ""
+
+#: src/post-types/class-course.php:268
+msgid "Duration (in hours)"
+msgstr ""
+
+#: src/post-types/class-course.php:292 src/post-types/class-course.php:293
+msgid "Category"
+msgstr ""
+
+#: src/post-types/class-course.php:294
+msgid "Search Categories"
+msgstr ""
+
+#: src/post-types/class-course.php:295
+msgid "All Categories"
+msgstr ""
+
+#: src/post-types/class-course.php:296
+msgid "parent Category"
+msgstr ""
+
+#: src/post-types/class-course.php:297
+msgid "parent Category:"
+msgstr ""
+
+#: src/post-types/class-course.php:298
+msgid "Edit Category"
+msgstr ""
+
+#: src/post-types/class-course.php:299
+msgid "Update Category"
+msgstr ""
+
+#: src/post-types/class-course.php:300
+msgid "Add new Category"
+msgstr ""
+
+#: src/post-types/class-course.php:301
+msgid "new Category Name"
+msgstr ""
+
+#: src/post-types/class-course.php:302
+msgid "Categories"
+msgstr ""
+
+#: src/post-types/class-course.php:317 src/post-types/class-course.php:318
+msgid "Title"
+msgstr ""
+
+#: src/post-types/class-course.php:319
+msgid "Search Titles"
+msgstr ""
+
+#: src/post-types/class-course.php:320
+msgid "All Titles"
+msgstr ""
+
+#: src/post-types/class-course.php:321
+msgid "parent Title"
+msgstr ""
+
+#: src/post-types/class-course.php:322
+msgid "parent Title:"
+msgstr ""
+
+#: src/post-types/class-course.php:323
+msgid "Edit Title"
+msgstr ""
+
+#: src/post-types/class-course.php:324
+msgid "Update Title"
+msgstr ""
+
+#: src/post-types/class-course.php:325
+msgid "Add new Title"
+msgstr ""
+
+#: src/post-types/class-course.php:326
+msgid "new Title Name"
+msgstr ""
+
+#: src/post-types/class-course.php:327
+msgid "Titles"
+msgstr "Titres"
+
+#: src/post-types/class-course.php:342 src/post-types/class-course.php:343
+msgid "Level"
+msgstr "Niveau"
+
+#: src/post-types/class-course.php:344
+msgid "Search Levels"
+msgstr "Recherche niveaux"
+
+#: src/post-types/class-course.php:345
+msgid "All Levels"
+msgstr "Tous les niveaux"
+
+#: src/post-types/class-course.php:346
+msgid "parent Level"
+msgstr "niveau parent"
+
+#: src/post-types/class-course.php:347
+msgid "parent Level:"
+msgstr "niveau parent:"
+
+#: src/post-types/class-course.php:348
+msgid "Edit Level"
+msgstr "Éditer Niveau"
+
+#: src/post-types/class-course.php:349
+msgid "Update Level"
+msgstr "Mettre à jour Niveau"
+
+#: src/post-types/class-course.php:350
+msgid "Add new Level"
+msgstr "Ajouter nouveau Niveau"
+
+#: src/post-types/class-course.php:351
+msgid "new Level Name"
+msgstr "nouveau nom de niveau"
+
+#: src/post-types/class-course.php:352
+msgid "Levels"
+msgstr "Niveaux"
+
+#: src/public/shortcodes/class-courses.php:73
+msgid "Filter by type"
+msgstr "Filtrer par type"
+
+#: src/public/shortcodes/class-courses.php:111
+msgid "All"
+msgstr "Tous"
+
+#: src/public/shortcodes/class-courses.php:125
+msgid "There are no courses currently available in this category."
+msgstr "Aucun cours n’est actuellement disponible dans cette catégorie."
+
+#: src/public/shortcodes/class-courses.php:125
+msgid "There are no courses currently available."
+msgstr "Aucun cours n’est actuellement disponible."
+
+#: src/public/shortcodes/class-courses.php:159
+msgid "No badge issued for this course"
+msgstr "Aucun badge émis pour ce cours"
+
+#: templates/content/single-course.tpl.php:45
+msgid "Autoevaluation form"
+msgstr "Formulaire d’auto-évaluation"
+
+#: templates/content/single-course.tpl.php:47
+msgid "Request this badge"
+msgstr "Demander ce badge"
+
+#. translators: Link to badge page, badge page title and issued date.
+#: templates/partials/badge-received.php:30
+#, php-format
+msgid "You have received the badge <a href=\"%1$s\">%2$s</a> on %3$s"
+msgstr "Vous avez reçu le badge <a href=\"%1$s\">%2$s</a> le %3$s"
+
+#. Plugin Name of the plugin/theme
+msgid "Badge Factor 2 - Courses Addon"
+msgstr "Badge Factor 2 - Module de Cours"
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/ctrlwebinc/bf2-courses"
+msgstr "https://github.com/ctrlwebinc/bf2-courses"
+
+#. Description of the plugin/theme
+msgid ""
+"Adds Courses to Badge Factor 2, and if WooCommerce is installed, adds "
+"Courses to WooCommerce as well."
+msgstr ""
+"Ajoute les Cours à Badge Factor 2, et si WooCommerce est installé, ajoute "
+"les cours à WooCommerce également."
+
+#. Author of the plugin/theme
+msgid "ctrlweb"
+msgstr "ctrlweb"
+
+#. Author URI of the plugin/theme
+msgid "https://badgefactor2.com/"
+msgstr "https://badgefactor2.com/"
