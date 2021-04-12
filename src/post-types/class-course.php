@@ -394,8 +394,11 @@ class Course {
 	 * @return boolean
 	 */
 	public static function is_accessible( $course_id ) {
-		// FIXME Implement.
-		return false;
+
+		$product_id = \get_post_meta( $course_id, 'course_product', true );
+		$user = \wp_get_current_user();
+
+		return wc_customer_bought_product( $user->user_email, \get_current_user_id(), $product_id );
 	}
 
 	/**
