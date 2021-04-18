@@ -40,7 +40,7 @@ $plugin_data = get_plugin_data( BF2_COURSES_FILE );
 <div class="badge-actions">
   <div class="course-actions">
     <?php if ( null !== $bf2_template->fields['assertion'] && ! $bf2_template->fields['assertion']->revoked ) : ?>
-      <?php include( Template::locate( 'partials/badge-received' ) ); ?>
+      <?php include( Template::locate( 'badge-received' ) ); ?>
     <?php elseif ( $bf2_template->fields['autoevaluation_form'] ) : ?>
       <a class="btn" href="<?php echo get_permalink( $bf2_template->fields['badge_page']->ID ) . $bf2_template->fields['autoevaluation_form_slug']; ?>"><?php echo __( 'Autoevaluation form', $plugin_data['TextDomain'] ); ?></a>
     <?php else : ?>
