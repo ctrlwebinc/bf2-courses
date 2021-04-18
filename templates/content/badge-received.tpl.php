@@ -22,15 +22,16 @@
  * @phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralDomain
  * @phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
  */
+global $bf2_template;
 ?>
 <div class="status">
 	<?php
 	echo sprintf(
 		// translators: Link to badge page, badge page title and issued date.
 		__( 'You have received the badge <a href="%1$s">%2$s</a> on %3$s', $plugin_data['TextDomain'] ),
-		get_permalink( $badge_page->ID ),
-		$badge_page->post_title,
-		$issued_on
+		get_permalink( $bf2_template->fields['badge_page']->ID ),
+		$bf2_template->fields['badge_page']->post_title,
+		gmdate( 'Y-m-d', strtotime( $bf2_template->fields['assertion']->issuedOn ) )
 	);
 	?>
 </div>
