@@ -98,7 +98,8 @@ class Course_Controller extends Page_Controller {
 			$fields['badge_entity_id']          = get_post_meta( $fields['badge_page_id'], 'badge', true );
 			$fields['badge']                    = BadgeClass::get( $fields['badge_entity_id'] );
 			$fields['issuer']                   = $fields['badge'] ? Issuer::get( $fields['badge']->issuer ) : '';
-			$fields['autoevaluation_form']      = is_plugin_active( 'bf2-gravityforms/bf2-gravityforms.php' ) ? get_post_meta( $fields['badge_page']->ID, 'autoevaluation_form_id', true ) : '';
+			$fields['autoevaluation_form_type'] = is_plugin_active( 'bf2-gravityforms/bf2-gravityforms.php' ) ? get_post_meta( $fields['badge_page']->ID, 'autoevaluation_form_type', true ) !== 'none' : false;
+			$fields['autoevaluation_form']      = is_plugin_active( 'bf2-gravityforms/bf2-gravityforms.php' ) && $fields['autoevaluation_form'] ? get_post_meta( $fields['badge_page']->ID, 'autoevaluation_form_id', true ) : '';
 			$fields['form_type']                = get_post_meta( $fields['badge_page']->ID, 'badge_request_form_type', true );
 			$fields['backpack']                 = BadgrProvider::get_all_assertions_from_user_backpack( $fields['badgr_user'] );
 			$fields['assertion']                = null;
