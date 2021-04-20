@@ -53,7 +53,7 @@ class Course {
 	 */
 	public static function init_hooks() {
 		add_action( 'init', array( self::class, 'init' ), 10 );
-		add_action( 'admin_init', array( self::class, 'add_capabilities' ), 10 );
+		add_action( 'admin_init', array( self::class, 'add_capabilities' ), 11 );
 		add_action( 'init', array( self::class, 'register_taxonomies' ), 10 );
 		add_filter( 'post_updated_messages', array( self::class, 'updated_messages' ), 10 );
 		add_action( 'cmb2_admin_init', array( self::class, 'register_cpt_metaboxes' ), 10 );
@@ -170,49 +170,61 @@ class Course {
 	 * @return void
 	 */
 	public static function add_capabilities() {
+		
 		$capabilities = array(
-			'edit_' . self::$slug_plural             => array(
+			'read_' . self::$slug						=> array(
 				'administrator',
 			),
-			'edit_other_' . self::$slug_plural       => array(
+			'edit_' . self::$slug						=> array(
 				'administrator',
 			),
-			'edit_published_' . self::$slug_plural   => array(
+			'delete_' . self::$slug						=> array(
 				'administrator',
 			),
-			'publish_' . self::$slug_plural          => array(
+			'publish_' . self::$slug_plural				=> array(
 				'administrator',
 			),
-			'delete_' . self::$slug_plural           => array(
+			
+			'edit_' . self::$slug_plural				=> array(
 				'administrator',
 			),
-			'delete_others_' . self::$slug_plural    => array(
+			'edit_others_' . self::$slug_plural			=> array(
 				'administrator',
 			),
-			'delete_published_' . self::$slug_plural => array(
+			'edit_published_' . self::$slug_plural		=> array(
 				'administrator',
 			),
-			'delete_private_' . self::$slug_plural   => array(
+			'edit_private_' . self::$slug_plural		=> array(
 				'administrator',
 			),
-			'edit_private_' . self::$slug_plural     => array(
+			
+			'read_private_' . self::$slug_plural		=> array(
 				'administrator',
 			),
-			'read_private_' . self::$slug_plural     => array(
+			
+			'delete_' . self::$slug_plural				=> array(
 				'administrator',
 			),
-			'read_' . self::$slug                    => array(
+			'delete_others_' . self::$slug_plural		=> array(
 				'administrator',
 			),
+			'delete_published_' . self::$slug_plural	=> array(
+				'administrator',
+			),
+			'delete_private_' . self::$slug_plural		=> array(
+				'administrator',
+			),
+			
+			
 		);
 
 		foreach ( $capabilities as $capability => $roles ) {
 			foreach ( $roles as $role ) {
 				$role = get_role( $role );
-				$role->add_cap( $capability );
+				$role->add_cap( $capability, true );
 			}
 		}
-
+		
 	}
 
 
