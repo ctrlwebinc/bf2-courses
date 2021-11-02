@@ -489,4 +489,21 @@ class Course {
 
 	}
 
+	public static function select_options() {
+		$args  = array(
+			'post_type'   => self::$slug,
+			'numberposts' => -1,
+			'post_status' => 'publish',
+		);
+
+		$courses = get_posts( $args );
+
+		$course_options = array();
+
+		foreach ( $courses as $course ) {
+			$course_options[ $course->ID ] = $course->post_title;
+		}
+
+		return $course_options;
+	}
 }
