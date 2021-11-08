@@ -109,7 +109,7 @@ class Course {
 				'hierarchical'      => false,
 				'show_ui'           => true,
 				'show_in_nav_menus' => true,
-				'supports'          => array( 'title', 'editor' ),
+				'supports'          => array( 'title', 'editor', 'revisions' ),
 				'has_archive'       => ( isset( $badgefactor2_options['bf2_courses_use_archive'] ) && 'on' === $badgefactor2_options['bf2_courses_use_archive'] ),
 				'rewrite'           => array( 'slug' => 'courses' ),
 				'query_var'         => true,
