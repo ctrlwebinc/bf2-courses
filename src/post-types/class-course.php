@@ -458,31 +458,35 @@ class Course {
 	public static function get_by_badge_slug( $badge_slug ) {
 		global $wpdb;
 
+		$posts_table = $wpdb->prefix . 'posts';
+		$postmeta_table = $wpdb->prefix . 'postmeta';
+
 		$id = $wpdb->get_var(
 			$wpdb->prepare(
-				'SELECT p.ID 
-				FROM wp_posts p 
-				JOIN wp_postmeta pm 
+				"SELECT p.ID 
+				FROM {$posts_table} p 
+				JOIN {$postmeta_table} pm 
 				ON p.ID = pm.post_id 
-				WHERE p.post_type = "course" 
-				AND pm.meta_key = "course_badge_page"
+				WHERE p.post_type = 'course' 
+				AND pm.meta_key = 'course_badge_page'
 				AND pm.meta_value IN (
 					SELECT ID 
-					FROM wp_posts p2
-					JOIN wp_postmeta pm2 
+					FROM {$posts_table} p2
+					JOIN {$postmeta_table} pm2 
 					ON p2.ID = pm2.post_id
-					WHERE p2.post_type = "badge-page" 
-					AND pm2.meta_key = "badge"
+					WHERE p2.post_type = 'badge-page' 
+					AND pm2.meta_key = 'badge'
 					AND pm2.meta_value IN (
 						SELECT pm3.meta_value 
-						FROM wp_posts p3
-						JOIN wp_postmeta pm3 
+						FROM {$posts_table} p3
+						JOIN {$postmeta_table} pm3 
 						ON p3.ID = pm3.post_id
 						WHERE p3.post_name = %s
 					)
 				)
-				LIMIT 1',
+				LIMIT 1",
 				$badge_slug
+				
 			)
 		);
 		return get_post( $id );
