@@ -59,7 +59,7 @@ class Courses {
 	 * @param string $tag Tag.
 	 * @return string
 	 */
-	public static function list( string $tag, $atts = array(), $content = null ) {
+	public static function list( $atts = array(), $content = null, string $tag = '') {
 
 		$plugin_data = get_plugin_data( BF2_COURSES_FILE );
 
