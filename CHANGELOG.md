@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-## 1.5.0
+## 1.3.0
 
 - Added: CHANGELOG
 - Fixed: php 8.0 deprecation
