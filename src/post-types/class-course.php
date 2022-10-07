@@ -407,10 +407,11 @@ class Course {
 	 */
 	public static function is_accessible( $course_id ) {
 
-		$product_id = \get_post_meta( $course_id, 'course_product', true );
-		$user = \wp_get_current_user();
+		$user            = \wp_get_current_user();
+		$product_id      = \get_post_meta( $course_id, 'course_product', true );
+		$has_free_access = apply_filters( 'bf2_has_free_access', null );
 
-		return wc_customer_bought_product( $user->user_email, \get_current_user_id(), $product_id );
+		return $has_free_access || wc_customer_bought_product( $user->user_email, \get_current_user_id(), $product_id );
 	}
 
 	/**
@@ -419,13 +420,8 @@ class Course {
 	 * @return boolean
 	 */
 	public static function is_purchasable( $course_id ) {
-		global $product;
-		$user          = get_current_user_id();
-		$has_purchased = $product &&
-			function_exists( 'wc_customer_bought_product' ) &&
-			wc_customer_bought_product( null, get_current_user_id(), $product->get_id() );
 
-		return ! $has_purchased;
+		return ! self::is_accessible( $course_id );
 	}
 
 

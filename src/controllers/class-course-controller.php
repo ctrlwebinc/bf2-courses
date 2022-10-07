@@ -74,8 +74,11 @@ class Course_Controller extends Page_Controller {
 				// A product is linked to the course.
 				$product_id = get_post_meta( $post->ID, 'course_product', true );
 				if ( $product_id ) {
+
+					$has_free_access = apply_filters( 'bf2_has_free_access', null );
+
 					// The client has not purchased this product, redirect to the product page.
-					if ( ! wc_customer_bought_product( $current_user->user_email, $current_user->ID, $product_id ) ) {
+					if ( ! $has_free_access && ! wc_customer_bought_product( $current_user->user_email, $current_user->ID, $product_id ) ) {
 						$badgepage_id = get_post_meta( $post->ID, 'course_badge_page', true );
 						echo sprintf( '<script>window.location.replace("%s")</script>', get_permalink( $badgepage_id ) );
 						die;
