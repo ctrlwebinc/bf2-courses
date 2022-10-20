@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+## 1.4.0
+- Refactorisation: Suppression des commandes à 0$ pour les clients institutionnels. Amélioration des performances.
+
 ## 1.3.0
 
 - Added: CHANGELOG
