@@ -67,7 +67,12 @@ class Course_Controller extends Page_Controller {
 
 		if ( static::$post_type === $post->post_type ) {
 
-			$current_user = wp_get_current_user();
+            if ( is_user_logged_in() ) {
+                $current_user = wp_get_current_user();
+            } else {
+                wp_redirect(home_url());
+                exit;
+            }
 
 			// The WooCommerce add-on is installed.
 			if ( class_exists( 'BadgeFactor2\BF2_WooCommerce' ) ) {

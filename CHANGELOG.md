@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+## 1.4.1
+- Added: add condition if user connected or not and redirect to homepage (class-course-controller.php line 70)
+
 ## 1.4.0
 - Refactored: fixed performance issues.
 
