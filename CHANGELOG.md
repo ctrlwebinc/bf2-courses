@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+## 1.4.2
+- Fixed: free courses / sexto
+
 ## 1.4.1
 - Added: add condition if user connected or not and redirect to homepage (class-course-controller.php line 70)
 
