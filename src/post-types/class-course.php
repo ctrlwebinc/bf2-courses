@@ -409,7 +409,7 @@ class Course {
 
 		$user            = \wp_get_current_user();
 		$product_id      = \get_post_meta( $course_id, 'course_product', true );
-		$has_free_access = apply_filters( 'bf2_has_free_access', null );
+	   	$has_free_access = apply_filters( 'bf2_has_free_access', null );
 
 		return $has_free_access || wc_customer_bought_product( $user->user_email, \get_current_user_id(), $product_id );
 	}
